@@ -150,7 +150,7 @@ function Register() {
       return;
     }
 
-    fetch("http://127.0.0.1:8000/api/register/", {
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/register/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

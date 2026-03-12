@@ -15,7 +15,7 @@ function DonateBook() {
 
   // load categories
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categories/")
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/categories/")
       .then(res => res.json())
       .then(data => setCategories(data))
       .catch(err => console.log(err));
@@ -40,7 +40,7 @@ function DonateBook() {
       formData.append("image", image);
     }
 
-    fetch("http://127.0.0.1:8000/api/donate_book/", {
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/donate_book/", {
       method: "POST",
       body: formData
     })

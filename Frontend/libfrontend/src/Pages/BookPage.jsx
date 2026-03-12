@@ -7,7 +7,7 @@ function BookPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/list_books/")
+        fetch("https://fullstackproject1-1l7d.onrender.com/api/list_books/")
             .then(res => res.json())
             .then(data => setBooks(data));
     }, []);

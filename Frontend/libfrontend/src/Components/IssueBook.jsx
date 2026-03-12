@@ -92,7 +92,7 @@ function IssueBooks() {
 // };
 
 const handleIssue = (member_id, book_id) => {
-  fetch("http://127.0.0.1:8000/api/issue_book/", {
+  fetch("https://fullstackproject1-1l7d.onrender.com/api/issue_book/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ member_id, book_id }),

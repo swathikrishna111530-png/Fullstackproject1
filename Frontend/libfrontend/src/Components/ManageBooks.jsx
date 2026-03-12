@@ -11,7 +11,7 @@ function ManageBooks() {
 
   // Load books
   const loadBooks = () => {
-    fetch("http://127.0.0.1:8000/api/list_books/")
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/list_books/")
       .then(res => res.json())
       .then(data => setBooks(data))
       .catch(() => alert("Failed to load books"));
@@ -19,7 +19,7 @@ function ManageBooks() {
 
   // Load categories
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categories/")
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/categories/")
       .then(res => res.json())
       .then(data => setCategories(data));
   }, []);
@@ -33,7 +33,7 @@ function ManageBooks() {
     const confirmDelete = window.confirm("Are you sure you want to delete this book?");
     if (!confirmDelete) return;
 
-    fetch(`http://127.0.0.1:8000/api/delete_book/${id}/?user_id=${user_id}`, {
+    fetch(`https://fullstackproject1-1l7d.onrender.com/api/delete_book/${id}/?user_id=${user_id}`, {
       method: "DELETE"
     })
       .then(res => res.json())
@@ -54,7 +54,7 @@ function ManageBooks() {
     const confirmEdit = window.confirm("Are you sure you want to update this book?");
     if (!confirmEdit) return;
 
-    fetch(`http://127.0.0.1:8000/api/update_book/${editingBook.id}/`, {
+    fetch(`https://fullstackproject1-1l7d.onrender.com/api/update_book/${editingBook.id}/`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

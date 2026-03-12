@@ -506,7 +506,7 @@ const handleRequest = () => {
     return;
   }
 
-  fetch("http://127.0.0.1:8000/api/request_book/", {
+  fetch("https://fullstackproject1-1l7d.onrender.com/api/request_book/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -528,7 +528,7 @@ const submitRating = (rate) => {
     return;
   }
 
-  fetch("http://127.0.0.1:8000/api/rate_book/", {
+  fetch("https://fullstackproject1-1l7d.onrender.com/api/rate_book/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

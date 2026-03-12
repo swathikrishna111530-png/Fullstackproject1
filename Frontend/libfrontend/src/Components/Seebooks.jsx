@@ -108,7 +108,7 @@ function ViewBooks() {
   const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/list_books/")
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/list_books/")
       .then(res => res.json())
       .then(data => setBooks(data))
       .catch(() => alert("Failed to load books"));
@@ -122,7 +122,7 @@ function ViewBooks() {
     const member_id = localStorage.getItem("user_id");
     if (!member_id) return alert("Member not logged in");
 
-    const response = await fetch("http://127.0.0.1:8000/api/request_book/", {
+    const response = await fetch("https://fullstackproject1-1l7d.onrender.com/api/request_book/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

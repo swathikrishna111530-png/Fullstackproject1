@@ -7,7 +7,7 @@ function BookDetail() {
   const [book, setBook] = useState(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/books/${id}/`)
+    fetch(`https://fullstackproject1-1l7d.onrender.com/api/books/${id}/`)
       .then(res => res.json())
       .then(data => setBook(data));
   }, [id]);

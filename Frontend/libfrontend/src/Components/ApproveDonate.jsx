@@ -9,7 +9,7 @@ function ApproveDonatedBooks() {
   // Fetch pending donated books
   const fetchPendingBooks = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/pending_donated_books/");
+      const res = await axios.get("https://fullstackproject1-1l7d.onrender.com/api/pending_donated_books/");
       console.log("Pending books:", res.data);
       setBooks(res.data);
     } catch (err) {
@@ -26,7 +26,7 @@ function ApproveDonatedBooks() {
   // Approve a book
   const approveBook = async (bookId) => {
     try {
-      await axios.patch(`http://127.0.0.1:8000/api/approve_donated_book/${bookId}/`);
+      await axios.patch(`https://fullstackproject1-1l7d.onrender.com/api/approve_donated_book/${bookId}/`);
       alert("Book approved successfully!");
       setBooks((prevBooks) => prevBooks.filter((b) => b.id !== bookId));
     } catch (err) {

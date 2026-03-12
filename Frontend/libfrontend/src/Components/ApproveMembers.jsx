@@ -24,7 +24,7 @@ function ApproveMembers() {
 
   const approveMember = (id) => {
     // Only admin can approve, send admin_id in body if needed
-    fetch(`http://127.0.0.1:8000/api/approve_member/${id}/`, {
+    fetch(`https://fullstackproject1-1l7d.onrender.com/api/approve_member/${id}/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: 1 }) // assuming admin_id=1

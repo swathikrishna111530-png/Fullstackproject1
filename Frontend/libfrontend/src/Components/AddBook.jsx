@@ -117,7 +117,7 @@ function AddBook() {
 
   // Load categories from backend
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categories/")
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/categories/")
       .then(res => res.json())
       .then(data => setCategories(data))
       .catch(err => console.log(err));
@@ -147,7 +147,7 @@ function AddBook() {
     formData.append("user_id", user_id);
     if (image) formData.append("image", image);
 
-    fetch("http://127.0.0.1:8000/api/add_book/", {
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/add_book/", {
       method: "POST",
       body: formData, // ✅ FormData automatically sets correct headers
     })
