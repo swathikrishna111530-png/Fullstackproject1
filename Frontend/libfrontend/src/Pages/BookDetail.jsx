@@ -337,7 +337,7 @@
 // export default BookDetail;
 
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate , Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./BookDetail.css";
 
@@ -349,7 +349,7 @@ function BookDetail() {
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/book_detail/${id}/`)
+    fetch(`https://fullstackproject1-1l7d.onrender.com/api/book_detail/${id}/`)
       .then((res) => res.json())
       .then((data) => setBook(data));
   }, [id]);
@@ -357,144 +357,7 @@ function BookDetail() {
   // ⭐ Prevent crash before API loads
   if (!book) return <p>Loading...</p>;
 
-  // const handleRequest = () => {
-  //   const member_id = localStorage.getItem("user_id");
-
-  //   if (!member_id) {
-  //     alert("Please login as member");
-  //     navigate("/login", { state: { from: `/book/${id}` } });
-  //     return;
-  //   }
-
-  //   fetch("http://127.0.0.1:8000/api/request_book/", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       member_id: parseInt(member_id),
-  //       book_id: id
-  //     })
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => alert(data.message || data.error));
-  // };
-
-  //   const handleRequest = () => {
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   const member_id = localStorage.getItem("user_id");
-
-  //   if (!isLoggedIn || !member_id) {
-  //     alert("Please login as member");
-  //     navigate("/login", { state: { from: `/book/${id}` } });
-  //     return;
-  //   }
-
-  //   fetch("http://127.0.0.1:8000/api/request_book/", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       member_id: parseInt(member_id),
-  //       book_id: parseInt(id)
-  //     })
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => alert(data.message || data.error));
-  // };
-
-  // const submitRating = (rate) => {
-  //   const member_id = localStorage.getItem("user_id");
-
-  //   if (!member_id) {
-  //     alert("Please login as member");
-  //     navigate("/login", { state: { from: `/book/${id}` } });
-  //     return;
-  //   }
-
-  //   fetch("http://127.0.0.1:8000/api/rate_book/", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       member_id: parseInt(member_id),
-  //       book_id: parseInt(id),
-  //       rating: rate
-  //     })
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       alert(data.message || data.error);
-  //       setRating(rate);
-  //     });
-  // };
-  //   const handleRequest = () => {
-  //   const member_id = localStorage.getItem("user_id");
-
-  //   if (!member_id) {
-  //     alert("Please login as member");
-  //     navigate("/login", { state: { from: `/book/${id}` } });
-  //     return;
-  //   }
-
-  //   fetch("http://127.0.0.1:8000/api/request_book/", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       member_id: parseInt(member_id),
-  //       book_id: parseInt(id)
-  //     })
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => alert(data.message || data.error));
-  // };
-
-  //   const submitRating = (rate) => {
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   const member_id = localStorage.getItem("user_id");
-
-  //   if (!isLoggedIn || !member_id) {
-  //     alert("Please login as member");
-  //     navigate("/login", { state: { from: `/book/${id}` } });
-  //     return;
-  //   }
-
-  //   fetch("http://127.0.0.1:8000/api/rate_book/", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       member_id: parseInt(member_id),
-  //       book_id: parseInt(id),
-  //       rating: rate
-  //     })
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     alert(data.message || data.error);
-  //     setRating(rate);
-  //   });
-  // };
-
-  // const submitRating = (rate) => {
-  //   const member_id = localStorage.getItem("user_id");
-
-  //   if (!member_id) {
-  //     alert("Please login as member");
-  //     navigate("/login", { state: { from: `/book/${id}` } });
-  //     return;
-  //   }
-
-  //   fetch("http://127.0.0.1:8000/api/rate_book/", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       member_id: parseInt(member_id),
-  //       book_id: parseInt(id),
-  //       rating: rate
-  //     })
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     alert(data.message || data.error);
-  //     setRating(rate);
-  //   });
-  // };
+  
 
   const handleRequest = () => {
     const member_id = localStorage.getItem("user_id");
