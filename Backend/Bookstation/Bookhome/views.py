@@ -386,12 +386,19 @@ from rest_framework.response import Response
 
 @api_view(['GET'])
 def my_books(request, member_id):
-
     issued_books = IssuedBook.objects.filter(member_id=member_id, returned=False)
+    now = timezone.now()
 
     data = []
 
     for issued in issued_books:
+        # Calculate fine
+        fine = 0
+        if now > issued.return_date:
+            days_late = (now - issued.return_date).days
+            fine_units = days_late // 10  # every 10 days
+            fine = fine_units * 10  # ₹10 per 10 days
+
         data.append({
             "book_id": issued.book.id,
             "title": issued.book.title,
@@ -399,10 +406,31 @@ def my_books(request, member_id):
             "category": issued.book.category.cname if issued.book.category else "",
             "issued_at": issued.issued_at,
             "return_date": issued.return_date,
-            "available_copies": issued.book.available_copies
+            "available_copies": issued.book.available_copies,
+            "fine": fine  # <-- Added fine field
         })
 
     return Response(data)
+
+# @api_view(['GET'])
+# def my_books(request, member_id):
+
+#     issued_books = IssuedBook.objects.filter(member_id=member_id, returned=False)
+
+#     data = []
+
+#     for issued in issued_books:
+#         data.append({
+#             "book_id": issued.book.id,
+#             "title": issued.book.title,
+#             "author": issued.book.author.name if hasattr(issued.book.author, "name") else issued.book.author,
+#             "category": issued.book.category.cname if issued.book.category else "",
+#             "issued_at": issued.issued_at,
+#             "return_date": issued.return_date,
+#             "available_copies": issued.book.available_copies
+#         })
+
+#     return Response(data)
 
 
 
@@ -412,6 +440,37 @@ def my_books(request, member_id):
 
 from django.views.decorators.csrf import csrf_exempt
 
+# @api_view(['POST'])
+# def return_book(request):
+#     member_id = request.data.get('member_id')
+#     book_id = request.data.get('book_id')
+
+#     if not member_id or not book_id:
+#         return Response({"error": "member_id and book_id are required"}, status=400)
+
+#     issued = IssuedBook.objects.filter(
+#         member_id=member_id,
+#         book_id=book_id,
+#         returned=False
+#     ).first()
+
+#     if not issued:
+#         return Response({"error": "This book is not currently issued to this member"}, status=404)
+
+#     issued.returned = True
+#     issued.save()
+
+#     book = issued.book
+#     book.available_copies += 1
+#     book.save()
+
+#     return Response({"message": f"Book '{book.title}' returned successfully!"})
+
+from django.utils import timezone
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import IssuedBook
+
 @api_view(['POST'])
 def return_book(request):
     member_id = request.data.get('member_id')
@@ -420,43 +479,93 @@ def return_book(request):
     if not member_id or not book_id:
         return Response({"error": "member_id and book_id are required"}, status=400)
 
-    issued = IssuedBook.objects.filter(
-        member_id=member_id,
-        book_id=book_id,
-        returned=False
-    ).first()
+    issued = IssuedBook.objects.filter(member_id=member_id, book_id=book_id, returned=False).first()
 
     if not issued:
         return Response({"error": "This book is not currently issued to this member"}, status=404)
 
+    # Calculate fine
+    now = timezone.now()
+    fine = 0
+    if now > issued.return_date:
+        days_late = (now - issued.return_date).days
+        fine_units = days_late // 10
+        fine = fine_units * 10  # ₹10 per 10 days
+
+    # Update issued book
     issued.returned = True
+    issued.fine = fine
     issued.save()
 
+    # Update book availability
     book = issued.book
     book.available_copies += 1
     book.save()
 
-    return Response({"message": f"Book '{book.title}' returned successfully!"})
+    return Response({
+        "message": f"Book '{book.title}' returned successfully!",
+        "fine": fine
+    })
 
 @api_view(['POST'])
 def logout_user(request):
     return Response({"message": "Logout successful"})
 
+# @api_view(['POST'])
+# def donate_book(request):
+#     user_id = request.data.get("member")
+
+#     if not user_id:
+#         return Response({'error': 'Member ID is required'}, status=400)
+
+#     member = Member.objects.get(id=user_id)
+
+#     serializer = DonatedBookSerializer(data=request.data)
+#     if serializer.is_valid():
+#         serializer.save(member=member)
+#         return Response({'message': 'Book donation submitted successfully!'}, status=201)
+
+#     return Response(serializer.errors, status=400)
+
+
+
 @api_view(['POST'])
 def donate_book(request):
-    user_id = request.data.get("member")
+    user_id = request.data.get("member")  # member ID from request
 
     if not user_id:
         return Response({'error': 'Member ID is required'}, status=400)
 
     member = Member.objects.get(id=user_id)
 
-    serializer = DonatedBookSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(member=member)
-        return Response({'message': 'Book donation submitted successfully!'}, status=201)
+    # Get fields explicitly
+    title = request.data.get("title")
+    author = request.data.get("author")
+    category_id = request.data.get("category")
+    total_copies = request.data.get("total_copies", 1)
+    image = request.FILES.get("image")  # optional
 
-    return Response(serializer.errors, status=400)
+    if not title or not author or not category_id:
+        return Response({'error': 'Title, author, and category are required'}, status=400)
+
+    # Get the Category instance
+    category = Category.objects.filter(id=category_id).first()
+    if not category:
+        return Response({'error': 'Category not found'}, status=404)
+
+    # Save the donated book
+    donated_book = DonatedBook.objects.create(
+        member=member,
+        title=title,
+        author=author,
+        category=category,
+        total_copies=total_copies,
+        image=image
+    )
+
+    # Serialize and return
+    serializer = DonatedBookSerializer(donated_book, context={'request': request})
+    return Response(serializer.data, status=201)
 
 
 
