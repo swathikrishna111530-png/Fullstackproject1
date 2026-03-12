@@ -6,13 +6,13 @@ function ApproveMembers() {
 
   const fetchMembers = () => {
     // Fetch pending members
-    fetch("http://127.0.0.1:8000/api/pending_members/")
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/pending_members/")
       .then(res => res.json())
       .then(data => setPendingMembers(data))
       .catch(err => console.error("Error fetching pending members:", err));
 
     // Fetch approved members
-    fetch("http://127.0.0.1:8000/api/approved_members/") // create this API if not yet
+    fetch("https://fullstackproject1-1l7d.onrender.com/api/approved_members/") // create this API if not yet
       .then(res => res.json())
       .then(data => setApprovedMembers(data))
       .catch(err => console.error("Error fetching approved members:", err));
