@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Full page background */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+     url("https://images.unsplash.com/photo-1512820790803-83ca734da794")
+    no-repeat center center/cover;
+
+  padding: 20px;
+}
+
+/* Title */
+.register-title {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* Form Card */
+.register-form {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs & Select */
+.register-form input,
+.register-form select {
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Button */
+.register-form button {
+  margin-top: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2c3e50;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-form button:hover {
+  background-color: #1abc9c;
+}
+
+/* Login Redirect */
+.login-redirect {
+  margin-top: 15px;
+  color: white;
+}
+
+.login-redirect a {
+  color: #1abc9c;
+  text-decoration: none;
+  font-weight: bold;
+}

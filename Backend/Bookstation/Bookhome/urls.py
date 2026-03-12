@@ -1,0 +1,36 @@
+from django.urls import path
+from .import views
+urlpatterns = [
+    path('hello/',views.hello),
+    path('register/',views.register),
+    path('login/',views.login),
+    path("approve_member/<int:member_id>/", views.approve_member),
+    path('pending_members/',views.pending_members),
+    path('approved_members/',views.approved_members),
+    path('add_category/',views.add_category),
+    path('add_book/',views.add_book),
+    # path('delete_book/<int:book_id>/',views.delete_book), 
+    path('delete_book/<str:book_id>/', views.delete_book),
+    path('update_book/<int:book_id>/',views.update_book),
+    path("list_categories/", views.list_categories),
+    path("list_books/", views.list_books),
+    path("categories/", views.categories),
+    path("request_book/", views.request_book),
+    path('approve_request/',views. approve_request),
+    path('pending_requests/',views. pending_requests),
+    # path('issue_book/<int:request_id>/',views.issue_book),
+    path('issue_book/', views.issue_book),
+    path('my_books/<int:member_id>/',views.my_books),
+    path('return_book/',views.return_book),
+    path('logout/', views.logout_user),
+    # path('donate_book/', views.donate_book),
+    # path('list_donated_books/', views.list_donated_books),
+    path('donate_book/', views.donate_book, name='donate_book'),
+    path('pending_donated_books/',views.pending_donated_books, name='pending-donated-books'),
+    path('approve_donated_book/<int:book_id>/', views.approve_donated_book),
+    path('approved_donated_books/', views.approved_donated_books, name='approved_donated_books'),
+    path('rate_book/', views.rate_book),
+    path('book_detail/<str:pk>/', views.book_detail, name='book_detail'),
+
+  
+]

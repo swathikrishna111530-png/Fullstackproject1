@@ -1,0 +1,54 @@
+/* DonateBook.css */
+
+.donatebook-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.donatebook-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.donatebook-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.donatebook-container input,
+.donatebook-container select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* ensures all fields same width */
+  box-sizing: border-box;
+}
+
+.donatebook-container input:focus,
+.donatebook-container select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+.donatebook-container button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.donatebook-container button:hover {
+  background-color: #45a049;
+}

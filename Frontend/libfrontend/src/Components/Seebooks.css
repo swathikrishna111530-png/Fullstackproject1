@@ -1,0 +1,117 @@
+.books-container {
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  min-height: 100vh;
+}
+
+.books-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+/* Table wrapper for scroll */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table styles */
+.books-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.books-table th {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.books-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.books-table tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Available copies colors */
+.available {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.not-available {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+/* Buttons */
+.select-btn {
+  padding: 6px 14px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.select-btn:hover {
+  background: #1d4ed8;
+}
+
+.select-btn:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/* Selected Book Card */
+.selected-book-card {
+  margin-top: 30px;
+  padding: 25px;
+  max-width: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.request-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.request-btn:hover {
+  background: #15803d;
+}
+
+.not-available-text {
+  color: red;
+  font-weight: bold;
+}
+
+.no-books {
+  text-align: center;
+  font-size: 18px;
+  color: #1e3a8a;
+  font-weight: bold;
+  padding: 20px;
+}
